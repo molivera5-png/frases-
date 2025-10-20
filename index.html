@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>💫 Frase Motivadora del Día 💫</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #89f7fe, #66a6ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: "Poppins", sans-serif;
+      text-align: center;
+      margin: 0;
+    }
+    .contenedor {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      width: 80%;
+      max-width: 400px;
+      animation: aparecer 1s ease;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    @keyframes aparecer {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+    <h2>🌟 Tu frase motivadora 🌟</h2>
+    <p id="frase">Cargando frase...</p>
+    <button onclick="nuevaFrase()">Otra frase 🔄</button>
+  </div>
+
+  <script>
+    const frases = [
+      "Cree en ti, incluso cuando nadie más lo haga.",
+      "Cada día es una nueva oportunidad para mejorar.",
+      "Tu actitud determina tu dirección.",
+      "El esfuerzo de hoy será el éxito de mañana.",
+      "No te rindas, lo mejor está por venir.",
+      "Sonríe, porque la vida se vuelve más bonita cuando lo haces.",
+      "Hazlo con pasión o no lo hagas.",
+      "Tus sueños no tienen fecha de caducidad.",
+      "Todo logro comienza con la decisión de intentarlo.",
+      "La disciplina vence al talento cuando el talento no se esfuerza.",
+      "Nada cambia si tú no cambias.",
+      "Persiste hasta que suceda.",
+      "A veces perder es la mejor forma de aprender.",
+      "Tu futuro lo decides tú.",
+      "Haz lo que puedas, con lo que tengas, donde estés.",
+      "Cree en el proceso, confía en el tiempo.",
+      "Cada paso te acerca a la meta.",
+      "El miedo se vence con acción.",
+      "Cree, trabaja y logra lo que te propongas.",
+      "El éxito llega cuando no te rindes."
+    ];
+
+    function nuevaFrase() {
+      const indice = Math.floor(Math.random() * frases.length);
+      document.getElementById("frase").textContent = frases[indice];
+    }
+
+    // Mostrar una frase diferente al cargar la página
+    nuevaFrase();
+
+    // Forzar actualización para evitar caché (para QR)
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for(let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+
+    // Si la página se abre desde QR o con un enlace repetido, forzar nueva carga
+    window.onload = () => {
+      const url = new URL(window.location);
+      url.searchParams.set('t', Date.now());
+      window.history.replaceState(null, '', url);
+    };
+  </script>
+</body>
+</html>
