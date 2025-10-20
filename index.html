@@ -164,6 +164,13 @@
 ];
 
 
+      const indice = Math.floor(Math.random() * frases.length);
+      document.getElementById("frase").textContent = frases[indice];
+    }
+
+    // Mostrar una frase diferente al cargar la página
+    nuevaFrase();
+
     // Forzar actualización para evitar caché (para QR)
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then(function(registrations) {
@@ -182,5 +189,3 @@
   </script>
 </body>
 </html>
-
-
